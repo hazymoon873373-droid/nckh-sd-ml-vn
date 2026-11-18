@@ -1,0 +1,398 @@
+{
+  "format": "apa",
+  "total": 56,
+  "citations": [
+    {
+      "index": 1,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1287/mnsc.48.8.1074.169)**",
+      "raw": "https://doi.org/10.1287/mnsc.48.8.1074.169)**"
+    },
+    {
+      "index": 2,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1287/mnsc.1120.1616)**",
+      "raw": "https://doi.org/10.1287/mnsc.1120.1616)**"
+    },
+    {
+      "index": 3,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.ijforecast.2026.04.004)**",
+      "raw": "https://doi.org/10.1016/j.ijforecast.2026.04.004)**"
+    },
+    {
+      "index": 4,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.ejor.2024.11.050)**",
+      "raw": "https://doi.org/10.1016/j.ejor.2024.11.050)**"
+    },
+    {
+      "index": 5,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.irfa.2017.05.007)**",
+      "raw": "https://doi.org/10.1016/j.irfa.2017.05.007)**"
+    },
+    {
+      "index": 6,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.qref.2021.07.001)**",
+      "raw": "https://doi.org/10.1016/j.qref.2021.07.001)**"
+    },
+    {
+      "index": 7,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1371/journal.pone.0332154)**",
+      "raw": "https://doi.org/10.1371/journal.pone.0332154)**"
+    },
+    {
+      "index": 8,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1057/s41599-024-02807-x)**",
+      "raw": "https://doi.org/10.1057/s41599-024-02807-x)**"
+    },
+    {
+      "index": 9,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1080/14697680701668426",
+      "raw": "https://doi.org/10.1080/14697680701668426"
+    },
+    {
+      "index": 10,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.jeconom.2019.12.005",
+      "raw": "https://doi.org/10.1016/j.jeconom.2019.12.005"
+    },
+    {
+      "index": 11,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1287/mnsc.2023.4953",
+      "raw": "https://doi.org/10.1287/mnsc.2023.4953"
+    },
+    {
+      "index": 12,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.frl.2024.105626",
+      "raw": "https://doi.org/10.1016/j.frl.2024.105626"
+    },
+    {
+      "index": 13,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.eswa.2021.115497",
+      "raw": "https://doi.org/10.1016/j.eswa.2021.115497"
+    },
+    {
+      "index": 14,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.ijforecast.2026.04.004",
+      "raw": "https://doi.org/10.1016/j.ijforecast.2026.04.004"
+    },
+    {
+      "index": 15,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.ejor.2024.11.050",
+      "raw": "https://doi.org/10.1016/j.ejor.2024.11.050"
+    },
+    {
+      "index": 16,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1073/pnas.2107794118",
+      "raw": "https://doi.org/10.1073/pnas.2107794118"
+    },
+    {
+      "index": 17,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.jempfin.2007.02.001",
+      "raw": "https://doi.org/10.1016/j.jempfin.2007.02.001"
+    },
+    {
+      "index": 18,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1007/s11156-012-0277-0",
+      "raw": "https://doi.org/10.1007/s11156-012-0277-0"
+    },
+    {
+      "index": 19,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.finmar.2014.05.002",
+      "raw": "https://doi.org/10.1016/j.finmar.2014.05.002"
+    },
+    {
+      "index": 20,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.engappai.2024.108599",
+      "raw": "https://doi.org/10.1016/j.engappai.2024.108599"
+    },
+    {
+      "index": 21,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1111/1468-0262.00167",
+      "raw": "https://doi.org/10.1111/1468-0262.00167"
+    },
+    {
+      "index": 22,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1080/15427560.2013.759579",
+      "raw": "https://doi.org/10.1080/15427560.2013.759579"
+    },
+    {
+      "index": 23,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1093/rfs/hhaa009",
+      "raw": "https://doi.org/10.1093/rfs/hhaa009"
+    },
+    {
+      "index": 24,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1111/eufm.12431",
+      "raw": "https://doi.org/10.1111/eufm.12431"
+    },
+    {
+      "index": 25,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.2307/2296431",
+      "raw": "https://doi.org/10.2307/2296431"
+    },
+    {
+      "index": 26,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.pacfin.2023.102176",
+      "raw": "https://doi.org/10.1016/j.pacfin.2023.102176"
+    },
+    {
+      "index": 27,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.ejor.2024.08.029",
+      "raw": "https://doi.org/10.1016/j.ejor.2024.08.029"
+    },
+    {
+      "index": 28,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1007/s00291-025-00814-1",
+      "raw": "https://doi.org/10.1007/s00291-025-00814-1"
+    },
+    {
+      "index": 29,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.jfineco.2021.08.017",
+      "raw": "https://doi.org/10.1016/j.jfineco.2021.08.017"
+    },
+    {
+      "index": 30,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1287/mnsc.48.8.1074.169",
+      "raw": "https://doi.org/10.1287/mnsc.48.8.1074.169"
+    },
+    {
+      "index": 31,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1287/mnsc.38.4.555",
+      "raw": "https://doi.org/10.1287/mnsc.38.4.555"
+    },
+    {
+      "index": 32,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.ejor.2007.12.017",
+      "raw": "https://doi.org/10.1016/j.ejor.2007.12.017"
+    },
+    {
+      "index": 33,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1111/j.1467-937x.2005.00350.x",
+      "raw": "https://doi.org/10.1111/j.1467-937x.2005.00350.x"
+    },
+    {
+      "index": 34,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1287/mnsc.2022.01092",
+      "raw": "https://doi.org/10.1287/mnsc.2022.01092"
+    },
+    {
+      "index": 35,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.ejor.2017.02.047",
+      "raw": "https://doi.org/10.1016/j.ejor.2017.02.047"
+    },
+    {
+      "index": 36,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.qref.2021.07.001",
+      "raw": "https://doi.org/10.1016/j.qref.2021.07.001"
+    },
+    {
+      "index": 37,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1057/s41599-024-02807-x",
+      "raw": "https://doi.org/10.1057/s41599-024-02807-x"
+    },
+    {
+      "index": 38,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1111/1540-6261.00592",
+      "raw": "https://doi.org/10.1111/1540-6261.00592"
+    },
+    {
+      "index": 39,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.irfa.2024.103599",
+      "raw": "https://doi.org/10.1016/j.irfa.2024.103599"
+    },
+    {
+      "index": 40,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1198/jbes.2009.06167",
+      "raw": "https://doi.org/10.1198/jbes.2009.06167"
+    },
+    {
+      "index": 41,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1371/journal.pone.0332154",
+      "raw": "https://doi.org/10.1371/journal.pone.0332154"
+    },
+    {
+      "index": 42,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1287/opre.2014.1340",
+      "raw": "https://doi.org/10.1287/opre.2014.1340"
+    },
+    {
+      "index": 43,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1287/mnsc.1120.1616",
+      "raw": "https://doi.org/10.1287/mnsc.1120.1616"
+    },
+    {
+      "index": 44,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.irfa.2017.05.007",
+      "raw": "https://doi.org/10.1016/j.irfa.2017.05.007"
+    },
+    {
+      "index": 45,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.pacfin.2018.10.005",
+      "raw": "https://doi.org/10.1016/j.pacfin.2018.10.005"
+    },
+    {
+      "index": 46,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1016/j.neucom.2019.10.110",
+      "raw": "https://doi.org/10.1016/j.neucom.2019.10.110"
+    },
+    {
+      "index": 47,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1007/s10994-018-5755-8",
+      "raw": "https://doi.org/10.1007/s10994-018-5755-8"
+    },
+    {
+      "index": 48,
+      "type": "doi",
+      "classification": "primary",
+      "formatted": "https://doi.org/10.1002/for.3021",
+      "raw": "https://doi.org/10.1002/for.3021"
+    },
+    {
+      "index": 49,
+      "type": "author_year",
+      "classification": "primary",
+      "formatted": "Levy (2002).",
+      "raw": "Levy (2002)"
+    },
+    {
+      "index": 50,
+      "type": "author_year",
+      "classification": "primary",
+      "formatted": "Huang & Shih (2013).",
+      "raw": "Huang & Shih (2013)"
+    },
+    {
+      "index": 51,
+      "type": "author_year",
+      "classification": "primary",
+      "formatted": "Leshno & Levy (2002).",
+      "raw": "Leshno & Levy (2002)"
+    },
+    {
+      "index": 52,
+      "type": "author_year",
+      "classification": "primary",
+      "formatted": "Hronec & Tobek (2026).",
+      "raw": "Hronec & Tobek (2026)"
+    },
+    {
+      "index": 53,
+      "type": "author_year",
+      "classification": "primary",
+      "formatted": "Puerto (2025).",
+      "raw": "Puerto (2025)"
+    },
+    {
+      "index": 54,
+      "type": "url",
+      "classification": "primary",
+      "formatted": "Retrieved from https://www.jmlr.org/papers/volume7/meinshausen06a/meinshausen06a.pdf",
+      "raw": "https://www.jmlr.org/papers/volume7/meinshausen06a/meinshausen06a.pdf"
+    },
+    {
+      "index": 55,
+      "type": "url",
+      "classification": "primary",
+      "formatted": "Retrieved from https://arxiv.org/abs/2402.02698",
+      "raw": "https://arxiv.org/abs/2402.02698"
+    },
+    {
+      "index": 56,
+      "type": "url",
+      "classification": "primary",
+      "formatted": "Retrieved from https://arxiv.org/abs/2211.07767",
+      "raw": "https://arxiv.org/abs/2211.07767"
+    }
+  ]
+}

@@ -1,0 +1,588 @@
+[
+  {
+    "doi": "10.1287/mnsc.38.4.555",
+    "authors": [
+      "Levy, Haim"
+    ],
+    "year": 1992,
+    "title": "Stochastic Dominance and Expected Utility: Survey and Analysis",
+    "journal": "Management Science",
+    "volume": "38",
+    "issue": "4",
+    "page": "555-593",
+    "url": "https://doi.org/10.1287/mnsc.38.4.555"
+  },
+  {
+    "doi": "10.1287/mnsc.1120.1616",
+    "authors": [
+      "Tzeng, Larry Y.",
+      "Huang, Rachel J.",
+      "Shih, Pai-Ta"
+    ],
+    "year": 2013,
+    "title": "Revisiting Almost Second-Degree Stochastic Dominance",
+    "journal": "Management Science",
+    "volume": "59",
+    "issue": "5",
+    "page": "1250-1254",
+    "url": "https://doi.org/10.1287/mnsc.1120.1616"
+  },
+  {
+    "doi": "10.1287/opre.2014.1340",
+    "authors": [
+      "Tsetlin, Ilia",
+      "Winkler, Robert L.",
+      "Huang, Rachel J.",
+      "Tzeng, Larry Y."
+    ],
+    "year": 2015,
+    "title": "Generalized Almost Stochastic Dominance",
+    "journal": "Operations Research",
+    "volume": "63",
+    "issue": "2",
+    "page": "363-377",
+    "url": "https://doi.org/10.1287/opre.2014.1340"
+  },
+  {
+    "doi": "10.1287/mnsc.2022.01092",
+    "authors": [
+      "Luo, Chunling",
+      "Chen, Piao",
+      "Jaillet, Patrick"
+    ],
+    "year": 2025,
+    "title": "Portfolio Optimization Based on Almost Second-Degree Stochastic Dominance",
+    "journal": "Management Science",
+    "volume": "71",
+    "issue": "8",
+    "page": "7029-7055",
+    "url": "https://doi.org/10.1287/mnsc.2022.01092"
+  },
+  {
+    "doi": "10.1287/mnsc.2023.4953",
+    "authors": [
+      "Arvanitis, Stelios",
+      "Scaillet, Olivier",
+      "Topaloglou, Nikolas"
+    ],
+    "year": 2023,
+    "title": "Spanning Analysis of Stock Market Anomalies Under Prospect Stochastic Dominance",
+    "journal": "Management Science",
+    "volume": null,
+    "issue": null,
+    "page": "mnsc.2023.4953",
+    "url": "https://doi.org/10.1287/mnsc.2023.4953"
+  },
+  {
+    "doi": "10.2307/2296431",
+    "authors": [
+      "Hanoch, G.",
+      "Levy, H."
+    ],
+    "year": 1969,
+    "title": "The Efficiency Analysis of Choices Involving Risk",
+    "journal": "The Review of Economic Studies",
+    "volume": "36",
+    "issue": "3",
+    "page": "335-346",
+    "url": "https://doi.org/10.2307/2296431"
+  },
+  {
+    "doi": "10.1111/1468-0262.00167",
+    "authors": [
+      "Davidson, Russell",
+      "Duclos, Jean-Yves"
+    ],
+    "year": 2000,
+    "title": "Statistical Inference for Stochastic Dominance and for the Measurement of Poverty and Inequality",
+    "journal": "Econometrica",
+    "volume": "68",
+    "issue": "6",
+    "page": "1435-1464",
+    "url": "https://doi.org/10.1111/1468-0262.00167"
+  },
+  {
+    "doi": "10.1111/j.1467-937x.2005.00350.x",
+    "authors": [
+      "Linton, Oliver",
+      "Maasoumi, Esfandiar",
+      "Whang, Yoon-Jae"
+    ],
+    "year": 2005,
+    "title": "Consistent Testing for Stochastic Dominance under General Sampling Schemes",
+    "journal": "Review of Economic Studies",
+    "volume": "72",
+    "issue": "3",
+    "page": "735-765",
+    "url": "https://doi.org/10.1111/j.1467-937x.2005.00350.x"
+  },
+  {
+    "doi": "10.1198/jbes.2009.06167",
+    "authors": [
+      "Scaillet, Olivier",
+      "Topaloglou, Nikolas"
+    ],
+    "year": 2010,
+    "title": "Testing for Stochastic Dominance Efficiency",
+    "journal": "Journal of Business &amp; Economic Statistics",
+    "volume": "28",
+    "issue": "1",
+    "page": "169-180",
+    "url": "https://doi.org/10.1198/jbes.2009.06167"
+  },
+  {
+    "doi": "10.1016/j.ejor.2024.08.029",
+    "authors": [
+      "Junová, Jana",
+      "Kopa, Miloš"
+    ],
+    "year": 2025,
+    "title": "Measures of stochastic non-dominance in portfolio optimization",
+    "journal": "European Journal of Operational Research",
+    "volume": "321",
+    "issue": "1",
+    "page": "269-283",
+    "url": "https://doi.org/10.1016/j.ejor.2024.08.029"
+  },
+  {
+    "doi": "10.1016/j.frl.2024.105626",
+    "authors": [
+      "Babapour-Azar, Ali",
+      "Khanjani-Shiraz, Rashed"
+    ],
+    "year": 2024,
+    "title": "A neural network framework for portfolio optimization under second-order stochastic dominance",
+    "journal": "Finance Research Letters",
+    "volume": "66",
+    "issue": null,
+    "page": "105626",
+    "url": "https://doi.org/10.1016/j.frl.2024.105626"
+  },
+  {
+    "doi": "10.1016/j.ijforecast.2026.04.004",
+    "authors": [
+      "Baruník, Jozef",
+      "Hronec, Martin",
+      "Tobek, Ondřej"
+    ],
+    "year": 2026,
+    "title": "Forecasting stock return distributions around the globe with quantile neural networks",
+    "journal": "International Journal of Forecasting",
+    "volume": "42",
+    "issue": "4",
+    "page": "1298-1313",
+    "url": "https://doi.org/10.1016/j.ijforecast.2026.04.004"
+  },
+  {
+    "doi": "10.1016/j.engappai.2024.108599",
+    "authors": [
+      "Consigli, Giorgio",
+      "Gomez, Alvaro A.",
+      "Zubelli, Jorge P."
+    ],
+    "year": 2024,
+    "title": "Optimal dynamic fixed-mix portfolios based on reinforcement learning with second order stochastic dominance",
+    "journal": "Engineering Applications of Artificial Intelligence",
+    "volume": "133",
+    "issue": null,
+    "page": "108599",
+    "url": "https://doi.org/10.1016/j.engappai.2024.108599"
+  },
+  {
+    "doi": "10.1016/j.irfa.2024.103599",
+    "authors": [
+      "Sak, Halis",
+      "Huang, Tao",
+      "Chng, Michael T."
+    ],
+    "year": 2024,
+    "title": "Exploring the factor zoo with a machine-learning portfolio",
+    "journal": "International Review of Financial Analysis",
+    "volume": "96",
+    "issue": null,
+    "page": "103599",
+    "url": "https://doi.org/10.1016/j.irfa.2024.103599"
+  },
+  {
+    "doi": "10.1016/j.eswa.2021.115497",
+    "authors": [
+      "Barucci, Emilio",
+      "Bonollo, Michele",
+      "Poli, Federico",
+      "Rroji, Edit"
+    ],
+    "year": 2021,
+    "title": "A machine learning algorithm for stock picking built on information based outliers",
+    "journal": "Expert Systems with Applications",
+    "volume": "184",
+    "issue": null,
+    "page": "115497",
+    "url": "https://doi.org/10.1016/j.eswa.2021.115497"
+  },
+  {
+    "doi": "10.1093/rfs/hhaa009",
+    "authors": [
+      "Gu, Shihao",
+      "Kelly, Bryan",
+      "Xiu, Dacheng"
+    ],
+    "year": 2020,
+    "title": "Empirical Asset Pricing via Machine Learning",
+    "journal": "The Review of Financial Studies",
+    "volume": "33",
+    "issue": "5",
+    "page": "2223-2273",
+    "url": "https://doi.org/10.1093/rfs/hhaa009"
+  },
+  {
+    "doi": "10.1016/j.jfineco.2021.08.017",
+    "authors": [
+      "Leippold, Markus",
+      "Wang, Qian",
+      "Zhou, Wenyu"
+    ],
+    "year": 2022,
+    "title": "Machine learning in the Chinese stock market",
+    "journal": "Journal of Financial Economics",
+    "volume": "145",
+    "issue": "2",
+    "page": "64-82",
+    "url": "https://doi.org/10.1016/j.jfineco.2021.08.017"
+  },
+  {
+    "doi": "10.1073/pnas.2107794118",
+    "authors": [
+      "Chernozhukov, Victor",
+      "Wüthrich, Kaspar",
+      "Zhu, Yinchu"
+    ],
+    "year": 2021,
+    "title": "Distributional conformal prediction",
+    "journal": "Proceedings of the National Academy of Sciences",
+    "volume": "118",
+    "issue": "48",
+    "page": "e2107794118",
+    "url": "https://doi.org/10.1073/pnas.2107794118"
+  },
+  {
+    "doi": "10.1007/s00291-025-00814-1",
+    "authors": [
+      "Kopa, Miloš",
+      "Kozmík, Karel"
+    ],
+    "year": 2025,
+    "title": "Robust approaches in portfolio optimization with stochastic dominance constraints",
+    "journal": "OR Spectrum",
+    "volume": "47",
+    "issue": "4",
+    "page": "1421-1453",
+    "url": "https://doi.org/10.1007/s00291-025-00814-1"
+  },
+  {
+    "doi": "10.1002/for.3021",
+    "authors": [
+      "Wolff, Dominik",
+      "Echterling, Fabian"
+    ],
+    "year": 2024,
+    "title": "Stock picking with machine learning",
+    "journal": "Journal of Forecasting",
+    "volume": "43",
+    "issue": "1",
+    "page": "81-102",
+    "url": "https://doi.org/10.1002/for.3021"
+  },
+  {
+    "doi": "10.1016/j.finmar.2014.05.002",
+    "authors": [
+      "Clark, Ephraim",
+      "Kassimatis, Konstantinos"
+    ],
+    "year": 2014,
+    "title": "Exploiting stochastic dominance to generate abnormal stock returns",
+    "journal": "Journal of Financial Markets",
+    "volume": "20",
+    "issue": null,
+    "page": "20-38",
+    "url": "https://doi.org/10.1016/j.finmar.2014.05.002"
+  },
+  {
+    "doi": "10.1080/14697680701668426",
+    "authors": [
+      "Abhyankar, Abhay",
+      "Ho, Keng-Yu",
+      "Zhao, Huainan"
+    ],
+    "year": 2008,
+    "title": "Value versus growth: stochastic dominance criteria",
+    "journal": "Quantitative Finance",
+    "volume": "8",
+    "issue": "7",
+    "page": "693-704",
+    "url": "https://doi.org/10.1080/14697680701668426"
+  },
+  {
+    "doi": "10.1111/eufm.12431",
+    "authors": [
+      "Han, Weihao",
+      "Newton, David",
+      "Platanakis, Emmanouil",
+      "Sutcliffe, Charles",
+      "Ye, Xiaoxia"
+    ],
+    "year": 2024,
+    "title": "On the (almost) stochastic dominance of cryptocurrency factor portfolios and implications for cryptocurrency asset pricing",
+    "journal": "European Financial Management",
+    "volume": "30",
+    "issue": "3",
+    "page": "1125-1164",
+    "url": "https://doi.org/10.1111/eufm.12431"
+  },
+  {
+    "doi": "10.1007/s11156-012-0277-0",
+    "authors": [
+      "Clark, Ephraim",
+      "Kassimatis, Konstantinos"
+    ],
+    "year": 2013,
+    "title": "International equity flows, marginal conditional stochastic dominance and diversification",
+    "journal": "Review of Quantitative Finance and Accounting",
+    "volume": "40",
+    "issue": "2",
+    "page": "251-271",
+    "url": "https://doi.org/10.1007/s11156-012-0277-0"
+  },
+  {
+    "doi": "10.1080/15427560.2013.759579",
+    "authors": [
+      "Fong, Wai Mun"
+    ],
+    "year": 2013,
+    "title": "Risk Preferences, Investor Sentiment and Lottery Stocks: A Stochastic Dominance Approach",
+    "journal": "Journal of Behavioral Finance",
+    "volume": "14",
+    "issue": "1",
+    "page": "42-52",
+    "url": "https://doi.org/10.1080/15427560.2013.759579"
+  },
+  {
+    "doi": "10.1016/j.pacfin.2023.102176",
+    "authors": [
+      "Huang, Xiangqian",
+      "Liu, Clark",
+      "Shu, Tao"
+    ],
+    "year": 2023,
+    "title": "Factors and anomalies in the Vietnamese stock market",
+    "journal": "Pacific-Basin Finance Journal",
+    "volume": "82",
+    "issue": null,
+    "page": "102176",
+    "url": "https://doi.org/10.1016/j.pacfin.2023.102176"
+  },
+  {
+    "doi": "10.1016/j.pacfin.2018.10.005",
+    "authors": [
+      "Vo, Xuan Vinh",
+      "Phan, Dang Bao Anh"
+    ],
+    "year": 2019,
+    "title": "Herd behavior and idiosyncratic volatility in a frontier market",
+    "journal": "Pacific-Basin Finance Journal",
+    "volume": "53",
+    "issue": null,
+    "page": "321-330",
+    "url": "https://doi.org/10.1016/j.pacfin.2018.10.005"
+  },
+  {
+    "doi": "10.1016/j.irfa.2017.05.007",
+    "authors": [
+      "Vo, Xuan Vinh"
+    ],
+    "year": 2017,
+    "title": "Trading of foreign investors and stock returns in an emerging market - Evidence from Vietnam",
+    "journal": "International Review of Financial Analysis",
+    "volume": "52",
+    "issue": null,
+    "page": "88-93",
+    "url": "https://doi.org/10.1016/j.irfa.2017.05.007"
+  },
+  {
+    "doi": "10.1016/j.qref.2021.07.001",
+    "authors": [
+      "Phan, Thi Nha Truc",
+      "Bertrand, Philippe",
+      "Phan, Hong Hai",
+      "Vo, Xuan Vinh"
+    ],
+    "year": 2023,
+    "title": "The role of investor behavior in emerging stock markets: Evidence from Vietnam",
+    "journal": "The Quarterly Review of Economics and Finance",
+    "volume": "87",
+    "issue": null,
+    "page": "367-376",
+    "url": "https://doi.org/10.1016/j.qref.2021.07.001"
+  },
+  {
+    "doi": "10.1057/s41599-024-02807-x",
+    "authors": [
+      "Phuoc, Tran",
+      "Anh, Pham Thi Kim",
+      "Tam, Phan Huy",
+      "Nguyen, Chien V."
+    ],
+    "year": 2024,
+    "title": "Applying machine learning algorithms to predict the stock price trend in the stock market – The case of Vietnam",
+    "journal": "Humanities and Social Sciences Communications",
+    "volume": "11",
+    "issue": "1",
+    "page": "393",
+    "url": "https://doi.org/10.1057/s41599-024-02807-x"
+  },
+  {
+    "doi": "10.1016/j.jeconom.2019.12.005",
+    "authors": [
+      "Arvanitis, Stelios",
+      "Scaillet, Olivier",
+      "Topaloglou, Nikolas"
+    ],
+    "year": 2020,
+    "title": "Spanning tests for Markowitz stochastic dominance",
+    "journal": "Journal of Econometrics",
+    "volume": "217",
+    "issue": "2",
+    "page": "291-311",
+    "url": "https://doi.org/10.1016/j.jeconom.2019.12.005"
+  },
+  {
+    "doi": "10.1016/j.ejor.2017.02.047",
+    "authors": [
+      "Ng, Pin",
+      "Wong, Wing-Keung",
+      "Xiao, Zhijie"
+    ],
+    "year": 2017,
+    "title": "Stochastic dominance via quantile regression with applications to investigate arbitrage opportunity and market efficiency",
+    "journal": "European Journal of Operational Research",
+    "volume": "261",
+    "issue": "2",
+    "page": "666-678",
+    "url": "https://doi.org/10.1016/j.ejor.2017.02.047"
+  },
+  {
+    "doi": "10.1016/j.ejor.2007.12.017",
+    "authors": [
+      "Levy, Moshe"
+    ],
+    "year": 2009,
+    "title": "Almost Stochastic Dominance and stocks for the long run",
+    "journal": "European Journal of Operational Research",
+    "volume": "194",
+    "issue": "1",
+    "page": "250-257",
+    "url": "https://doi.org/10.1016/j.ejor.2007.12.017"
+  },
+  {
+    "doi": "10.1287/mnsc.48.8.1074.169",
+    "authors": [
+      "Leshno, Moshe",
+      "Levy, Haim"
+    ],
+    "year": 2002,
+    "title": "Preferred by “All” and Preferred by “Most” Decision Makers: Almost Stochastic Dominance",
+    "journal": "Management Science",
+    "volume": "48",
+    "issue": "8",
+    "page": "1074-1085",
+    "url": "https://doi.org/10.1287/mnsc.48.8.1074.169"
+  },
+  {
+    "doi": "10.1111/1540-6261.00592",
+    "authors": [
+      "Post, Thierry"
+    ],
+    "year": 2003,
+    "title": "Empirical Tests for Stochastic Dominance Efficiency",
+    "journal": "The Journal of Finance",
+    "volume": "58",
+    "issue": "5",
+    "page": "1905-1931",
+    "url": "https://doi.org/10.1111/1540-6261.00592"
+  },
+  {
+    "doi": "10.1016/j.ejor.2024.11.050",
+    "authors": [
+      "Cesarone, Francesco",
+      "Puerto, Justo"
+    ],
+    "year": 2025,
+    "title": "Flexible enhanced indexation models through stochastic dominance and ordered weighted average optimization",
+    "journal": "European Journal of Operational Research",
+    "volume": "323",
+    "issue": "2",
+    "page": "657-670",
+    "url": "https://doi.org/10.1016/j.ejor.2024.11.050"
+  },
+  {
+    "doi": "10.1371/journal.pone.0332154",
+    "authors": [
+      "Thanh Nhon, Hoang",
+      "Do-Thi, Nga",
+      "Nguyen-Trang, Thao"
+    ],
+    "year": 2025,
+    "title": "Predicting stock returns using machine learning combined with data envelopment analysis and automatic feature engineering: A case study on the Vietnamese stock market",
+    "journal": "PLOS One",
+    "volume": "20",
+    "issue": "9",
+    "page": "e0332154",
+    "url": "https://doi.org/10.1371/journal.pone.0332154"
+  },
+  {
+    "doi": "10.1007/s10994-018-5755-8",
+    "authors": [
+      "Vovk, Vladimir",
+      "Shen, Jieli",
+      "Manokhin, Valery",
+      "Xie, Min-ge"
+    ],
+    "year": 2019,
+    "title": "Nonparametric predictive distributions based on conformal prediction",
+    "journal": "Machine Learning",
+    "volume": "108",
+    "issue": "3",
+    "page": "445-474",
+    "url": "https://doi.org/10.1007/s10994-018-5755-8"
+  },
+  {
+    "doi": "10.1016/j.neucom.2019.10.110",
+    "authors": [
+      "Vovk, Vladimir",
+      "Petej, Ivan",
+      "Nouretdinov, Ilia",
+      "Manokhin, Valery",
+      "Gammerman, Alexander"
+    ],
+    "year": 2020,
+    "title": "Computationally efficient versions of conformal predictive distributions",
+    "journal": "Neurocomputing",
+    "volume": "397",
+    "issue": null,
+    "page": "292-308",
+    "url": "https://doi.org/10.1016/j.neucom.2019.10.110"
+  },
+  {
+    "doi": "10.1111/j.1540-6261.1985.tb04957.x",
+    "authors": [
+      "LAKONISHOK, JOSEF",
+      "LEVI, MAURICE"
+    ],
+    "year": 1985,
+    "title": "Weekend Effects on Stock Returns: A Reply",
+    "journal": "The Journal of Finance",
+    "volume": "40",
+    "issue": "1",
+    "page": "351-352",
+    "url": "https://doi.org/10.1111/j.1540-6261.1985.tb04957.x"
+  }
+]

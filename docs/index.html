@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VN-QUANT NCKH | Dự báo Yêu/Không yêu Cổ phiếu &amp; Dòng tiền HOSE (ML × Almost SD)</title>
+  <meta name="description" content="Hệ thống Nghiên cứu Khoa học dự đoán mức độ ưa thích cổ phiếu (Yêu / Không yêu) và dịch chuyển dòng tiền tại Việt Nam bằng Distributional Machine Learning và Almost Stochastic Dominance trên 38 mã HOSE (2021–2026)." />
+  <link rel="stylesheet" href="./css/terminal.css" />
+</head>
+<body>
+  <!-- Live Market Ticker Ribbon -->
+  <div class="ticker-ribbon" aria-label="Bảng chạy giá 38 cổ phiếu HOSE">
+    <div id="ticker-track" class="ticker-track"></div>
+  </div>
+
+  <div class="app-shell">
+    <!-- Top Exchange Command Header -->
+    <header class="cmd-header">
+      <div class="brand-block">
+        <div class="brand-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18" />
+            <path d="M7 15l4-4 3 3 6-7" />
+          </svg>
+        </div>
+        <div class="brand-title">
+          <h1>VN-QUANT NCKH: Cổ phiếu "Yêu / Không yêu" &amp; Dòng tiền HOSE (ML × Almost SD)</h1>
+          <p class="brand-sub">Cơ sở toán học Utility &rarr; CDF &rarr; FSD/SSD/Almost SD (Tzeng et al., 2013) kết hợp Distributional ML (Baruník et al., 2026; Meinshausen, 2006) trên 376 bài Q1</p>
+        </div>
+      </div>
+
+      <div class="cmd-actions">
+        <span class="meta-chip" id="hdr-date-chip">Dữ liệu: Đang tải...</span>
+        <button type="button" class="btn" id="btn-export-csv" title="Tải bảng xếp hạng 38 mã HOSE ra file CSV">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Xuất CSV
+        </button>
+        <button type="button" class="btn" id="btn-theme-toggle" title="Chuyển nền Tối (Sàn Finance) / Sáng (Trình chiếu Hội đồng)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
+          <span id="theme-lbl">Nền Sáng</span>
+        </button>
+      </div>
+    </header>
+
+    <div id="global-status" class="banner-status is-hidden" role="status"></div>
+
+    <!-- 5 Research KPI Summary Tiles -->
+    <section class="kpi-strip" aria-label="Chỉ số tổng quan mô hình">
+      <div class="kpi-tile">
+        <div class="kpi-name">Số mã "YÊU" theo &epsilon;&#8322;</div>
+        <div class="kpi-val pos" id="kpi-loved">--</div>
+        <div class="kpi-detail" id="kpi-loved-sub">--</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="kpi-name">Ngành dẫn dắt dòng tiền</div>
+        <div class="kpi-val" id="kpi-top-sector">--</div>
+        <div class="kpi-detail" id="kpi-top-sector-sub">--</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="kpi-name">Lãi Out-of-Sample ASSD-Opt</div>
+        <div class="kpi-val pos" id="kpi-oos-ret">--</div>
+        <div class="kpi-detail" id="kpi-oos-sub">--</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="kpi-name">Sharpe / Sortino / MaxDD</div>
+        <div class="kpi-val" id="kpi-oos-risk">--</div>
+        <div class="kpi-detail" id="kpi-oos-risk-sub">--</div>
+      </div>
+      <div class="kpi-tile">
+        <div class="kpi-name">Dự báo Dòng tiền t+1 (p-val)</div>
+        <div class="kpi-val info" id="kpi-flow-pval">--</div>
+        <div class="kpi-detail" id="kpi-flow-sub">--</div>
+      </div>
+    </section>
+
+    <!-- Global Model & ASSD Parameter Strip -->
+    <section class="param-bar" aria-label="Điều khiển mô hình và ngưỡng Almost SD">
+      <div class="param-group">
+        <span class="param-label">Mô hình ML dự báo CDF:</span>
+        <select id="model-select" aria-label="Chọn mô hình Machine Learning">
+          <option value="ts_qml">Two-Stage Vol-Scaled QML + Conformal (Baruník et al., 2026)</option>
+          <option value="qrf">Quantile Regression Forests (Meinshausen, 2006)</option>
+          <option value="qgbdt">Quantile Gradient Boosting (Pinball GBDT)</option>
+        </select>
+
+        <span class="param-label">Ngưỡng dung sai &epsilon;&#8322;:</span>
+        <input id="eps-slider" type="range" min="0" max="0.15" step="0.001" value="0.059" aria-label="Thanh trượt ngưỡng epsilon 2" />
+        <span class="eps-pill" id="eps-readout">0.059 (5,9%)</span>
+      </div>
+
+      <div class="param-group">
+        <button type="button" class="btn btn-sm btn-toggle" data-eps="0.000">SSD Nghiêm ngặt (0,0%)</button>
+        <button type="button" class="btn btn-sm btn-toggle is-active" data-eps="0.059">Chuẩn Levy ASSD (5,9%)</button>
+        <button type="button" class="btn btn-sm btn-toggle" data-eps="0.100">Mở rộng (10,0%)</button>
+      </div>
+    </section>
+
+    <!-- Primary 5 Workspace Navigation Tabs -->
+    <nav class="nav-tabs" role="tablist" aria-label="Chức năng nền tảng nghiên cứu">
+      <button type="button" class="nav-tab is-active" role="tab" aria-selected="true" data-tab="terminal">
+        1. Bảng điện &amp; Kiểm định ASSD
+      </button>
+      <button type="button" class="nav-tab" role="tab" aria-selected="false" data-tab="liveml">
+        2. Live ML &amp; Nạp CSV
+      </button>
+      <button type="button" class="nav-tab" role="tab" aria-selected="false" data-tab="flows">
+        3. Dòng tiền Ngành &amp; Kinh tế lượng
+      </button>
+      <button type="button" class="nav-tab" role="tab" aria-selected="false" data-tab="backtest">
+        4. Backtest 45 Kỳ &amp; Danh mục
+      </button>
+      <button type="button" class="nav-tab" role="tab" aria-selected="false" data-tab="research">
+        5. Giả thuyết H1–H4 &amp; Kho 376 Bài Q1
+      </button>
+    </nav>
+
+    <main>
+      <!-- ========================================================= -->
+      <!-- TAB 1: EXCHANGE SCREENER & ASSD/CDF LABORATORY            -->
+      <!-- ========================================================= -->
+      <section id="tab-terminal" class="tab-panel">
+        <div class="terminal-grid">
+          <!-- Left: 38-Stock HOSE Screener -->
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Bảng Lọc 38 Cổ phiếu HOSE (Kỳ 22 phiên)</h2>
+              <span class="panel-sub" id="screener-count">38 / 38 mã</span>
+            </div>
+
+            <div class="filter-bar">
+              <input type="search" id="search-ticker" placeholder="Tìm mã hoặc tên (VD: FPT, VCB)..." aria-label="Tìm mã cổ phiếu" />
+              <select id="sector-filter" aria-label="Lọc theo nhóm ngành">
+                <option value="ALL">Tất cả 8 ngành HOSE</option>
+              </select>
+              <select id="verdict-filter" aria-label="Lọc theo kết luận ASSD">
+                <option value="ALL">Tất cả nhãn ASSD</option>
+                <option value="LOVE">Chỉ nhóm YÊU</option>
+                <option value="NEUTRAL">Trung tính</option>
+                <option value="HATE">Không yêu / Bị chi phối</option>
+              </select>
+            </div>
+
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="sortable" data-sort="ticker">Mã / Ngành</th>
+                    <th class="num sortable" data-sort="price">Giá</th>
+                    <th class="num sortable" data-sort="mean">E[R] ML</th>
+                    <th class="num sortable" data-sort="eps2">&epsilon;&#8322;*</th>
+                    <th class="num sortable" data-sort="cmf">CMF-20</th>
+                    <th class="num sortable" data-sort="weight">Tỷ trọng</th>
+                    <th>Kết luận</th>
+                  </tr>
+                </thead>
+                <tbody id="screener-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right: Multi-Chart Technical & ASSD Laboratory -->
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <h2 id="detail-title">VCB — Vietcombank</h2>
+                <span class="panel-sub" id="detail-subtitle">So sánh Phân phối tương lai 22 phiên</span>
+              </div>
+              <div class="param-group">
+                <label class="param-label" for="compare-target">Đối chiếu với:</label>
+                <select id="compare-target" aria-label="Chọn chuẩn so sánh FSD/SSD/ASSD">
+                  <option value="BENCH">VN-Basket Benchmark (38 mã HOSE)</option>
+                </select>
+                <span class="badge badge-bull" id="detail-badge">--</span>
+              </div>
+            </div>
+
+            <div class="quote-ribbon" id="quote-ribbon">
+              <div><div class="q-cell-lbl">Giá hiện tại / 1D</div><div class="q-cell-val" id="q-px">--</div></div>
+              <div><div class="q-cell-lbl">Lợi suất 22D / 66D</div><div class="q-cell-val" id="q-mom">--</div></div>
+              <div><div class="q-cell-lbl">E[R] ML (22 phiên)</div><div class="q-cell-val" id="q-mean">--</div></div>
+              <div><div class="q-cell-lbl">Biến động / Xác suất lỗ</div><div class="q-cell-val" id="q-risk">--</div></div>
+              <div><div class="q-cell-lbl">Dòng tiền CMF / AbTurn</div><div class="q-cell-val" id="q-flow">--</div></div>
+              <div><div class="q-cell-lbl">Trọng số ASSD / Chi phối</div><div class="q-cell-val" id="q-opt">--</div></div>
+            </div>
+
+            <div class="chart-wrap">
+              <svg id="svg-fan" class="chart-svg" viewBox="0 0 740 225" aria-label="Biểu đồ giá và hình nón phân vị ML"></svg>
+              <div id="tip-fan" class="chart-tooltip"></div>
+            </div>
+
+            <div class="legend-strip">
+              <span class="legend-item"><span class="sw-line" style="background: var(--bull);"></span>Đường phân phối A (Mã chọn)</span>
+              <span class="legend-item"><span class="sw-line" style="background: var(--bench);"></span>Đường phân phối B (Chuẩn đối chiếu)</span>
+              <span class="legend-item"><span class="sw-box" style="background: var(--bear-border);"></span>Diện tích vi phạm S&#8321; / S&#8322;</span>
+            </div>
+
+            <div class="charts-duo">
+              <div class="chart-wrap">
+                <svg id="svg-cdf" class="chart-svg" viewBox="0 0 520 220" aria-label="Đồ thị CDF F(r)"></svg>
+                <div id="tip-cdf" class="chart-tooltip"></div>
+              </div>
+              <div class="chart-wrap">
+                <svg id="svg-f2" class="chart-svg" viewBox="0 0 520 220" aria-label="Đồ thị tích phân bậc 2 F^(2)(t)"></svg>
+                <div id="tip-f2" class="chart-tooltip"></div>
+              </div>
+            </div>
+
+            <div class="formula-card" id="assd-formula-panel">
+              Đang tính toán công thức ASSD...
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- TAB 2: LIVE IN-BROWSER ML LAB & CUSTOM CSV UPLOAD         -->
+      <!-- ========================================================= -->
+      <section id="tab-liveml" class="tab-panel is-hidden">
+        <div class="two-col">
+          <!-- Interactive Browser ML Control & Walk-Forward Simulator -->
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Huấn luyện &amp; Kiểm định ML Trực tiếp trên Trình duyệt</h2>
+              <span class="panel-sub" id="liveml-runtime">Chạy JavaScript thuần trên 520 phiên × 38 mã</span>
+            </div>
+            <p class="panel-sub" style="margin-top:0;">
+              Em hoặc thành viên nhóm có thể tự thay đổi thuật toán, khung thời gian dự báo, bộ lọc cổ phiếu "vé số" MAX (Fong, 2013) và bấm chạy lại mô hình ngay lập tức để kiểm chứng độ nhạy khoa học.
+            </p>
+
+            <div class="filter-bar" style="margin-top:8px;">
+              <label class="param-label">Thuật toán:
+                <select id="live-algo">
+                  <option value="ts_qml">Two-Stage Vol-Scaled Quantile Ridge</option>
+                  <option value="qrf">Quantile Regression Forests (In-Browser)</option>
+                  <option value="hist">Historical Rolling Quantile Baseline</option>
+                </select>
+              </label>
+              <label class="param-label">Chân trời dự báo:
+                <select id="live-horizon">
+                  <option value="5">T+5 (1 tuần)</option>
+                  <option value="10">T+10 (2 tuần)</option>
+                  <option value="22" selected>T+22 (1 tháng)</option>
+                </select>
+              </label>
+              <label class="param-label">Trần tỷ trọng/mã:
+                <select id="live-wmax">
+                  <option value="0.15">15%</option>
+                  <option value="0.20" selected>20%</option>
+                  <option value="0.30">30%</option>
+                </select>
+              </label>
+              <label class="param-label">Phí+Thuế/vòng (%):
+                <input id="live-tx" type="number" step="0.05" min="0" max="1" value="0.35" style="width:72px;" />
+              </label>
+              <label class="param-label" style="display:inline-flex;align-items:center;gap:5px;">
+                <input id="live-lottery" type="checkbox" checked /> Lọc tránh cổ phiếu "Vé số" (MAX)
+              </label>
+            </div>
+
+            <div class="param-group" style="margin: 10px 0;">
+              <button type="button" class="btn btn-primary" id="btn-run-liveml">
+                Chạy Huấn luyện ML &amp; Tối ưu ASSD ngay
+              </button>
+              <span class="panel-sub" id="liveml-status-text">Nhấn nút hoặc đang chạy tự động lần đầu...</span>
+            </div>
+
+            <div class="charts-duo">
+              <div class="chart-wrap">
+                <svg id="svg-live-eq" class="chart-svg" viewBox="0 0 580 225" aria-label="Đường cong vốn chạy live trên trình duyệt"></svg>
+                <div id="tip-live-eq" class="chart-tooltip"></div>
+              </div>
+              <div class="chart-wrap">
+                <svg id="svg-live-pinball" class="chart-svg" viewBox="0 0 580 225" aria-label="Biểu đồ Pinball Loss theo từng phân vị"></svg>
+                <div id="tip-live-pinball" class="chart-tooltip"></div>
+              </div>
+            </div>
+
+            <div class="table-scroll" style="max-height:240px; margin-top:10px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Mã (Live ML)</th>
+                    <th>Ngành</th>
+                    <th class="num">Q10 (%)</th>
+                    <th class="num">Q50 (%)</th>
+                    <th class="num">Q90 (%)</th>
+                    <th class="num">&epsilon;&#8322;*</th>
+                    <th class="num">Tỷ trọng ASSD</th>
+                    <th>Nhãn</th>
+                  </tr>
+                </thead>
+                <tbody id="liveml-stock-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Right Column: Python H1 Full 5Y Benchmarks + Custom CSV Upload -->
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Kiểm định Giả thuyết H1: Độ chính xác Dự báo CDF (5 năm OOS)</h2>
+              <span class="panel-sub">45 kỳ Walk-Forward · 1.710 quan sát cổ phiếu–tháng</span>
+            </div>
+            <div class="table-scroll" style="max-height:290px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Mô hình ML</th>
+                    <th class="num">Pinball TB</th>
+                    <th class="num">Đuôi trái</th>
+                    <th class="num">Trung vị</th>
+                    <th class="num">CRPS (%)</th>
+                    <th class="num">Phủ 90%</th>
+                    <th class="num">RMSE (%)</th>
+                  </tr>
+                </thead>
+                <tbody id="h1-eval-body"></tbody>
+              </table>
+            </div>
+
+            <div class="panel-head" style="margin-top:16px;">
+              <h3>Thử nghiệm Dữ liệu Riêng (Nạp CSV từ vnstock / FireAnt / CafeF)</h3>
+              <button type="button" class="btn btn-sm" id="btn-sample-csv">Tải file CSV mẫu</button>
+            </div>
+            <label class="dropzone" for="csv-upload" style="display:block;">
+              <input id="csv-upload" type="file" accept=".csv,.txt" style="display:none;" />
+              <strong>Chọn file CSV lịch sử giá 1 cổ phiếu bất kỳ</strong><br/>
+              <span class="panel-sub">Cần các cột: <code>Date, Close</code> (khuyến khích thêm <code>High, Low, Volume, FNF</code>; tối thiểu 110 dòng)</span>
+            </label>
+            <div id="custom-csv-result" class="formula-card" style="display:none;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- TAB 3: CAPITAL FLOWS, LOTTERY EFFECT & H3 ECONOMETRICS    -->
+      <!-- ========================================================= -->
+      <section id="tab-flows" class="tab-panel is-hidden">
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Bản đồ Dòng tiền &amp; Ưa thích ASSD theo 8 Ngành HOSE</h2>
+              <span class="panel-sub">Dòng tiền hiện tại (CMF-20, AbTurn) &amp; Đánh giá ML</span>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nhóm Ngành</th>
+                    <th class="num">Mã "Yêu"</th>
+                    <th class="num">&epsilon;&#8322;* TB</th>
+                    <th class="num">AbTurn</th>
+                    <th class="num">CMF-20</th>
+                    <th class="num">Tỷ trọng Opt</th>
+                    <th>Tín hiệu</th>
+                  </tr>
+                </thead>
+                <tbody id="sector-flow-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Kiểm chứng Giả thuyết H3: Dòng tiền Sẽ đi đâu ở kỳ t+1?</h2>
+              <span class="panel-sub" id="h3-obs-count">1.710 quan sát Out-of-Sample</span>
+            </div>
+            <div class="table-scroll" style="max-height:290px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nhóm phân loại tại t</th>
+                    <th class="num">Số mẫu</th>
+                    <th class="num">Lãi t+1</th>
+                    <th class="num">CMF t</th>
+                    <th class="num">CMF t+1</th>
+                    <th class="num">AbTurn t+1</th>
+                  </tr>
+                </thead>
+                <tbody id="h3-groups-body"></tbody>
+              </table>
+            </div>
+
+            <div class="panel-head" style="margin-top:14px;">
+              <h3>Hồi quy Kinh tế lượng dự báo Dòng tiền CMF<sub>i,t+1</sub> (White HC1 SE)</h3>
+            </div>
+            <div class="table-scroll" style="max-height:290px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Biến giải thích tại t</th>
+                    <th class="num">Hệ số &beta;</th>
+                    <th class="num">Sai số HC1</th>
+                    <th class="num">t-stat</th>
+                    <th class="num">p-value</th>
+                    <th>Ý nghĩa thống kê</th>
+                  </tr>
+                </thead>
+                <tbody id="h3-reg-body"></tbody>
+              </table>
+            </div>
+
+            <div class="formula-card">
+              <strong>Phát hiện nổi bật (Fong, 2013 &amp; Tzeng et al., 2013):</strong> Trên 1.710 quan sát HOSE, điểm ưa thích <code>ASSD_Score_t</code> dự báo tích cực dòng tiền <code>CMF(t+1)</code> có ý nghĩa thống kê ở mức 5%, trong khi nhóm cổ phiếu "vé số" tăng trần nóng (<code>MAX_Lottery_t</code>, AbTurn hiện tại 1,33x) bị rút ròng mạnh vào kỳ sau (p &lt; 0,001).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- TAB 4: 45-PERIOD OOS BACKTEST, ALLOCATION & DATA AUDIT    -->
+      <!-- ========================================================= -->
+      <section id="tab-backtest" class="tab-panel is-hidden">
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Kiểm chứng Giả thuyết H4: Đường cong Vốn &amp; Drawdown (2021–2026)</h2>
+              <span class="panel-sub" id="bt-cost-sub">--</span>
+            </div>
+            <div class="legend-strip" id="bt-legend-toggles"></div>
+            <div class="chart-wrap">
+              <svg id="svg-bt-eq" class="chart-svg" viewBox="0 0 780 290" aria-label="Đường cong vốn 45 kỳ Backtest"></svg>
+              <div id="tip-bt-eq" class="chart-tooltip"></div>
+            </div>
+            <div class="chart-wrap">
+              <svg id="svg-bt-dd" class="chart-svg" viewBox="0 0 780 140" aria-label="Biểu đồ Drawdown"></svg>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Bảng Thước đo Hiệu quả &amp; Đuôi Rủi ro (Cesarone &amp; Puerto, 2025)</h2>
+            </div>
+            <div class="table-scroll" style="max-height:400px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Chiến lược</th>
+                    <th class="num">Lãi tổng</th>
+                    <th class="num">Năm hóa</th>
+                    <th class="num">Sharpe</th>
+                    <th class="num">Sortino</th>
+                    <th class="num">Omega</th>
+                    <th class="num">MaxDD</th>
+                    <th class="num">CVaR5</th>
+                    <th class="num">Turn</th>
+                  </tr>
+                </thead>
+                <tbody id="bt-table-body"></tbody>
+              </table>
+            </div>
+
+            <div class="panel-head" style="margin-top:14px;">
+              <h3>Danh mục Tối ưu ASSD-Opt Khuyến nghị Kỳ Hiện tại (Long-Only &le; 20%)</h3>
+            </div>
+            <div class="alloc-grid" id="opt-alloc-grid"></div>
+
+            <div class="panel-head" style="margin-top:14px;">
+              <h3>Kiểm định Làm sạch Dữ liệu Yahoo Finance (.VN)</h3>
+              <span class="panel-sub" id="audit-badge-sub">--</span>
+            </div>
+            <div class="table-scroll" style="max-height:170px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Mã</th>
+                    <th>Ngày</th>
+                    <th class="num">Nhảy giá thô</th>
+                    <th class="num">Sau xử lý</th>
+                    <th>Phương pháp chuẩn hóa</th>
+                  </tr>
+                </thead>
+                <tbody id="audit-log-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================= -->
+      <!-- TAB 5: COMPLETE SCIENTIFIC METHODOLOGY & 376 Q1 CORPUS    -->
+      <!-- ========================================================= -->
+      <section id="tab-research" class="tab-panel is-hidden">
+        <div class="two-col">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Bảng Kết luận Thực nghiệm Cho 4 Giả thuyết Khoa học (H1–H4)</h2>
+              <span class="panel-sub">Tổng hợp tự động từ pipeline 5 năm (1.305 phiên)</span>
+            </div>
+            <div class="hyp-grid" id="hypotheses-grid"></div>
+
+            <div class="formula-card" style="margin-top:12px;">
+              <strong>Quy trình Toán học Chuẩn Q1 của Đề tài (Hội đồng Bảo vệ):</strong>
+              <div class="formula-mono">
+                1. Utility Unknown &rarr; CDF Dự báo: F&#770;<sub>i,t+h</sub>(r | X<sub>i,t</sub>) qua QRF (Meinshausen, 2006) &amp; Two-Stage Quantile + Conformal Calibration (Baruník et al., 2026).<br/>
+                2. Điều kiện FSD: F<sub>A</sub>(r) &le; F<sub>B</sub>(r) &forall;r | Điều kiện SSD: F<sup>(2)</sup><sub>A</sub>(t) = &int;<sub>a</sub><sup>t</sup> F<sub>A</sub>(x)dx &le; F<sup>(2)</sup><sub>B</sub>(t).<br/>
+                3. Almost SSD (Tzeng, Huang &amp; Shih, 2013): E[R<sub>A</sub>] &ge; E[R<sub>B</sub>] và &epsilon;<sub>2</sub>* = &int;<sub>S2</sub> [F<sup>(2)</sup><sub>A</sub> - F<sup>(2)</sup><sub>B</sub>]dt / &int; |F<sup>(2)</sup><sub>A</sub> - F<sup>(2)</sup><sub>B</sub>|dt &le; 0,059.<br/>
+                4. Tối ưu Danh mục Enhanced Indexation (Cesarone &amp; Puerto, 2025): Giảm thiểu tổng vi phạm F<sup>(2)</sup> trên tập kịch bản liên kết copula với giới hạn trọng số 20% &amp; phạt xoay vòng.
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h2>Kho 376 Bài báo Q1 Đã Scan &amp; Xác minh DOI (24 Tạp chí Quốc tế)</h2>
+              <span class="panel-sub" id="corpus-count-label">376 / 376 bài Q1</span>
+            </div>
+            <div class="filter-bar">
+              <input type="search" id="paper-search" placeholder="Tìm theo tác giả, tiêu đề, tạp chí, DOI (VD: Tzeng, Barunik, Vietnam)..." aria-label="Tìm bài báo Q1" />
+              <select id="paper-branch" aria-label="Lọc theo 6 nhánh nghiên cứu">
+                <option value="ALL">Tất cả 6 nhánh (376 bài)</option>
+                <option value="SD_Theory_Tests">1. Lý thuyết &amp; Kiểm định SD (70)</option>
+                <option value="ML_Distributional_CDF">2. ML Dự báo Phân phối / CDF (70)</option>
+                <option value="Investor_Preference_Flows">3. Tâm lý, Ưa thích &amp; Dòng tiền (68)</option>
+                <option value="ML_Stock_Portfolio">4. ML Cổ phiếu &amp; Danh mục (64)</option>
+                <option value="Vietnam_Emerging_Markets">5. Việt Nam &amp; Thị trường mới nổi (61)</option>
+                <option value="Almost_SD">6. Almost Stochastic Dominance (43)</option>
+              </select>
+              <select id="paper-sort" aria-label="Sắp xếp bài báo">
+                <option value="citations">Sắp xếp: Trích dẫn cao nhất</option>
+                <option value="year">Sắp xếp: Mới nhất (2026 &rarr; cũ)</option>
+              </select>
+            </div>
+
+            <div class="paper-list" id="paper-list"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer-bar">
+      <span>NCKH Khoa Kinh tế — ĐH Sư phạm Kỹ thuật TP.HCM · Nền tảng Phân tích Distributional ML &amp; Almost SD trên 38 cổ phiếu HOSE + E1VFVN30 ETF (2021–2026)</span>
+      <span>Lưu ý dữ liệu: Dùng OHLCV Yahoo Finance (.VN) chuẩn hóa sự kiện quyền; kết quả phục vụ nghiên cứu học thuật, không phải khuyến nghị đầu tư.</span>
+    </footer>
+  </div>
+
+  <script src="./js/sd-math.js"></script>
+  <script src="./js/ml-engine.js"></script>
+  <script src="./js/charts.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>

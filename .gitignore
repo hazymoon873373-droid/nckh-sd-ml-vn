@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+web_demo/vn_market_cache.json
+web_demo/vn_market_cache_5y.json
+web_demo/model_results.json
+web_demo/research_bundle.json
+papers/*.pdf
+.DS_Store

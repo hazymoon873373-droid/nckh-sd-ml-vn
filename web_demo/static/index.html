@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NCKH Demo — Quantile ML & Almost Stochastic Dominance (HOSE)</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <div class="title-block">
+        <h1>Mô phỏng Đề tài NCKH: Dự báo Cổ phiếu "Yêu / Không yêu" & Dòng tiền Việt Nam</h1>
+        <p>Mô hình Quantile Regression Forests (Meinshausen, 2006) dự báo toàn bộ CDF lợi suất 22 phiên tới trên 21 mã HOSE từ Yahoo Finance, chấm nhãn bằng FSD / SSD / Almost SD (Tzeng et al., 2013).</p>
+      </div>
+      <div class="actions-block">
+        <span class="meta-pill" id="data-range-pill">Đang tải dữ liệu...</span>
+        <button type="button" class="btn-primary" id="refresh-btn">Cập nhật dữ liệu Yahoo (.VN)</button>
+      </div>
+    </header>
+
+    <div id="error-box" class="error-banner panel-hidden" role="alert"></div>
+
+    <section class="kpi-grid" aria-label="Chỉ số tổng hợp">
+      <div class="kpi-card">
+        <div class="kpi-label">Số mã "YÊU" theo ngưỡng &epsilon;&#8322;</div>
+        <div class="kpi-value" id="kpi-loved">-- / 21</div>
+        <div class="kpi-sub" id="kpi-loved-sub">Tỷ lệ mã thắng chuẩn VN-Leaders</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Ngành ưu thế &amp; hút tiền nhất</div>
+        <div class="kpi-value" id="kpi-top-sector" style="font-size: 18px;">--</div>
+        <div class="kpi-sub" id="kpi-top-sector-sub">Tỷ lệ mã đạt chuẩn ASSD</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Tăng trưởng Backtest ASSD+QRF</div>
+        <div class="kpi-value" id="kpi-bt-ret">--</div>
+        <div class="kpi-sub" id="kpi-bt-sub">So với VN-Basket sau phí &amp; thuế</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Sụt giảm tối đa (Max Drawdown)</div>
+        <div class="kpi-value" id="kpi-bt-mdd">--</div>
+        <div class="kpi-sub" id="kpi-bt-sortino">Sortino &amp; Omega</div>
+      </div>
+    </section>
+
+    <section class="control-strip" aria-label="Điều khiển ngưỡng Almost SD">
+      <div class="slider-group">
+        <label for="eps-slider">Ngưỡng dung sai Almost SD (&epsilon;&#8322;):</label>
+        <input id="eps-slider" type="range" min="0" max="0.15" step="0.001" value="0.059" />
+        <span class="slider-readout" id="eps-readout">0.059 (5,9%)</span>
+      </div>
+      <div class="preset-group">
+        <button type="button" class="btn-ghost" data-eps="0.000">SSD nghiêm ngặt (0,0%)</button>
+        <button type="button" class="btn-ghost is-active" data-eps="0.059">Chuẩn Levy ASSD (5,9%)</button>
+        <button type="button" class="btn-ghost" data-eps="0.100">Ngưỡng mở rộng (10,0%)</button>
+      </div>
+    </section>
+
+    <nav class="tab-nav" role="tablist" aria-label="Chế độ phân tích">
+      <button type="button" class="tab-btn is-active" role="tab" aria-selected="true" data-tab="lab">1. Phòng thí nghiệm CDF &amp; Almost SD</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="flow">2. Dòng tiền Đang &amp; Sẽ đi đâu</button>
+      <button type="button" class="tab-btn" role="tab" aria-selected="false" data-tab="backtest">3. Backtest Out-of-Sample &amp; Kiểm định Data</button>
+    </nav>
+
+    <main>
+      <!-- TAB 1: CDF & ALMOST SD LAB -->
+      <section id="tab-lab" class="lab-grid">
+        <div class="panel-box">
+          <div class="panel-header">
+            <h2>Bảng Xếp hạng 21 Mã HOSE (Kỳ tới 22 phiên)</h2>
+            <span class="panel-note">Nhấn vào một mã để xem đồ thị CDF</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Mã</th>
+                  <th>Ngành</th>
+                  <th class="num">E[R] ML</th>
+                  <th class="num">&epsilon;&#8322;* (%)</th>
+                  <th class="num">CMF</th>
+                  <th>Phân loại</th>
+                </tr>
+              </thead>
+              <tbody id="stock-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="charts-stack">
+          <div class="panel-box">
+            <div class="panel-header">
+              <h2 id="chart-title">Phân tích CDF &amp; Diện tích ASSD: FPT vs VN-Leaders</h2>
+              <span class="badge badge-love" id="selected-badge">--</span>
+            </div>
+
+            <div class="legend-row">
+              <span class="legend-item"><span class="swatch" style="background: var(--love);"></span>Cổ phiếu đang chọn</span>
+              <span class="legend-item"><span class="swatch" style="background: var(--bench);"></span>Benchmark (VN-Leaders)</span>
+              <span class="legend-item"><span class="swatch-box" style="background: var(--hate-border);"></span>Vùng vi phạm S&#8322; (nơi cổ phiếu kém hơn Benchmark)</span>
+            </div>
+
+            <svg id="svg-cdf" class="chart-svg" viewBox="0 0 640 240" aria-label="Biểu đồ CDF tương lai"></svg>
+
+            <div style="height: 12px;"></div>
+
+            <svg id="svg-f2" class="chart-svg" viewBox="0 0 640 240" aria-label="Biểu đồ tích phân bậc 2 ASSD"></svg>
+
+            <div class="formula-box" style="margin-top: 12px;" id="live-formula-box">
+              Đang tính toán công thức...
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: CAPITAL FLOW -->
+      <section id="tab-flow" class="panel-hidden">
+        <div class="two-col">
+          <div class="panel-box">
+            <div class="panel-header">
+              <h2>Bản đồ Dòng tiền theo Ngành (Hiện tại t &amp; Dự báo t+1)</h2>
+              <span class="panel-note">CMF-20 &amp; Thanh khoản bất thường từ OHLCV</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Ngành</th>
+                    <th class="num">Mã "Yêu"</th>
+                    <th class="num">&epsilon;&#8322;* TB</th>
+                    <th class="num">AbTurn (Đang hút tiền)</th>
+                    <th class="num">CMF-20</th>
+                    <th>Tín hiệu Dòng tiền</th>
+                  </tr>
+                </thead>
+                <tbody id="sector-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel-box">
+            <div class="panel-header">
+              <h2>Kiểm chứng Ngoài mẫu: Nhóm "Yêu" có hút tiền kỳ sau?</h2>
+              <span class="panel-note" id="oos-count-note">--</span>
+            </div>
+            <p class="panel-note" style="margin-top:0;">
+              Tổng hợp toàn bộ các tháng kiểm thử Walk-Forward trong quá khứ: so sánh lợi suất thực tế và chỉ số dòng tiền (CMF-20, AbTurn) ở tháng <strong>t+1</strong> giữa nhóm được ML+ASSD chấm <strong>"Yêu"</strong> ở đầu tháng <strong>t</strong> với nhóm còn lại.
+            </p>
+            <div class="table-wrap" style="margin-top: 10px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Chỉ tiêu thực tế ở kỳ t+1</th>
+                    <th class="num">Nhóm "YÊU" (ASSD &le; 5,9%)</th>
+                    <th class="num">Nhóm còn lại</th>
+                  </tr>
+                </thead>
+                <tbody id="oos-flow-body"></tbody>
+              </table>
+            </div>
+            <div class="formula-box" style="margin-top: 12px;">
+              <strong>Lưu ý nguồn dữ liệu dòng tiền:</strong> Demo web sử dụng dữ liệu OHLCV thật từ Yahoo Finance (<code>.VN</code>) để tính <em>Chaikin Money Flow (CMF-20)</em> và <em>Thanh khoản bất thường (AbTurn)</em>. Trong bài NCKH chính thức, em sẽ ghép thêm cột <strong>Mua/Bán ròng khối ngoại &amp; tự doanh</strong> từ bảng điện tử (<code>vnstock</code>/FireAnt).
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: BACKTEST & DATA AUDIT -->
+      <section id="tab-backtest" class="panel-hidden">
+        <div class="two-col">
+          <div class="panel-box">
+            <div class="panel-header">
+              <h2>Đường cong Vốn Out-of-Sample (Khởi đầu 100 triệu VND)</h2>
+              <span class="panel-note" id="bt-cost-note">--</span>
+            </div>
+            <div class="legend-row">
+              <span class="legend-item"><span class="swatch" style="background: var(--love);"></span>ASSD + QRF (Top-5 Yêu)</span>
+              <span class="legend-item"><span class="swatch" style="background: var(--amber-line);"></span>Mean-ML (Ridge Top-5)</span>
+              <span class="legend-item"><span class="swatch" style="background: var(--teal-line);"></span>Min-Volatility (Top-5)</span>
+              <span class="legend-item"><span class="swatch" style="background: var(--bench);"></span>VN-Basket (21 mã)</span>
+            </div>
+            <svg id="svg-equity" class="chart-svg" viewBox="0 0 640 270" aria-label="Biểu đồ hiệu quả Backtest"></svg>
+          </div>
+
+          <div class="panel-box">
+            <div class="panel-header">
+              <h2>Bảng Thước đo Tài chính (Chuẩn Q1 EJOR / Management Science)</h2>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Chiến lược</th>
+                    <th class="num">Lãi tổng</th>
+                    <th class="num">Sharpe</th>
+                    <th class="num">Sortino</th>
+                    <th class="num">Omega</th>
+                    <th class="num">Max DD</th>
+                  </tr>
+                </thead>
+                <tbody id="bt-metrics-body"></tbody>
+              </table>
+            </div>
+
+            <div class="panel-header" style="margin-top: 16px;">
+              <h3>Kiểm định Làm sạch Dữ liệu Yahoo Finance (.VN)</h3>
+              <span class="panel-note" id="audit-count-note">--</span>
+            </div>
+            <div class="table-wrap" style="max-height: 180px;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Mã</th>
+                    <th>Ngày</th>
+                    <th class="num">Nhảy giá thô</th>
+                    <th>Xử lý</th>
+                  </tr>
+                </thead>
+                <tbody id="audit-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer-note">
+      Mô phỏng phục vụ nghiên cứu khoa học (NCKH) tại ĐH Sư phạm Kỹ thuật TP.HCM. Toàn bộ kết quả dựa trên dữ liệu lịch sử Yahoo Finance (.VN) và mô hình Quantile Random Forest cài đặt bằng NumPy; đây không phải khuyến nghị đầu tư tài chính.
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
